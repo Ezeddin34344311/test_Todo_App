@@ -8,15 +8,21 @@ class MyTheme{
   static Color blackColor = Color(0XFF383838);
   static Color whiteColor = Color(0XFFFFFFFF);
   static Color redColor = Color(0XFFEC4B4B);
+  static Color backColor = Color(0XFFDFECDB);
 
 
   static ThemeData lightMode = ThemeData(
+    scaffoldBackgroundColor: backColor,
     appBarTheme: AppBarTheme(
       iconTheme: IconThemeData(
         color: whiteColor
       ),
       backgroundColor: pryColor,
-      
+      toolbarHeight: 100,
+    ),
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: pryColor,
+
     ),
     
     textTheme: TextTheme(
@@ -33,7 +39,7 @@ class MyTheme{
       subtitle1:TextStyle(
         color: blackColor,
         fontSize: 18,
-        fontWeight: FontWeight.normal,
+        fontWeight: FontWeight.w600,
       ),
       bodyText1:TextStyle(
         color: whiteColor,
@@ -44,7 +50,8 @@ class MyTheme{
     ),
     
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      backgroundColor: whiteColor,
+      backgroundColor: Colors.transparent,
+      elevation: 0,
       selectedIconTheme: IconThemeData(color: pryColor),
       unselectedIconTheme: IconThemeData(color: blackColor),
     )
