@@ -2,10 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:test_todo_app/models/tasks_model.dart';
 import 'package:test_todo_app/shared/styles/my_Theme.dart';
 
 class TasksItem extends StatelessWidget {
-  const TasksItem({Key? key}) : super(key: key);
+  TasksModel taskmodel ;
+  TasksItem(this.taskmodel);
 
   @override
   Widget build(BuildContext context) {
@@ -30,15 +32,12 @@ class TasksItem extends StatelessWidget {
                   width: 10,
                 ),
                 Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Name Task',
-                    style: Theme.of(context).textTheme.subtitle1,),
-                    Row(
-                      children: [
-                        Icon(Icons.timeline),
-                        Text('10:30'),
-                      ],
-                    ),
+                    Text(taskmodel.taskName,
+                    style: Theme.of(context).textTheme.headline1!.
+                    copyWith(color: MyTheme.blackColor),),
+                    Text(taskmodel.descruption,style: Theme.of(context).textTheme.subtitle1),
                   ],
                 ),
               ],

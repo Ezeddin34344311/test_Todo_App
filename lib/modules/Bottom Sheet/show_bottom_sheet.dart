@@ -103,7 +103,7 @@ class _ShowModalBottomSheetState extends State<ShowModalBottomSheet> {
             const SizedBox(
               height: 20,
             ),
-            ElevatedButton(onPressed: getData, child: const Text('Add Task'))
+            ElevatedButton(onPressed: setData, child: const Text('Add Task')),
           ],
         ),
       ),
@@ -123,11 +123,10 @@ class _ShowModalBottomSheetState extends State<ShowModalBottomSheet> {
     }
   }
 
-  void getData() {
+  void setData() {
     /// validation
     if (formKey.currentState!.validate()) {
       /// insert database
-
       TasksModel task = TasksModel(
           taskName: taskName,
           descruption: descruption,
@@ -135,14 +134,17 @@ class _ShowModalBottomSheetState extends State<ShowModalBottomSheet> {
       // Show Loading Page
       showLoading(context, 'Loading', isCanceled: false);
       // Add task From Firestore
-      addTasksFromFirestore(task).then((value) {
-        hideLoading(context);
-        showMessage(
+      addTasksFromFirestore(task).then(
+        (value) {
+          hideLoading(context);
+          showMessage(
             context,
-             'Added Successfully', 'OK', () => Navigator.pop(context));
-        Navigator.pop(context);
-      });
+            'Added Successfully','OK',() {
+              Navigator.pop(context);
+            },
+          );
+        },
+      );
     }
-    
   }
 }
