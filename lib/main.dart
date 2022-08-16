@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:test_todo_app/layout/home_layout.dart';
 import 'package:test_todo_app/shared/styles/my_Theme.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+void main()async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
+  
 }
 
 class MyApp extends StatelessWidget {

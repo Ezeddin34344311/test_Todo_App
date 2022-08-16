@@ -11,14 +11,14 @@ class ShowModalBottomSheet extends StatefulWidget {
 class _ShowModalBottomSheetState extends State<ShowModalBottomSheet> {
   String taskName = '';
   String descruption = '';
-  DateTime selectedDate = DateTime.now() ;
+  var selectedDate = DateTime.now() ;
   var formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-        margin: EdgeInsets.all(20),
-        padding: EdgeInsets.all(12),
+        margin:const  EdgeInsets.all(20),
+        padding:const  EdgeInsets.all(12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -88,7 +88,7 @@ class _ShowModalBottomSheetState extends State<ShowModalBottomSheet> {
                       onTap: (() {
                         showDate();
                       }),
-                      child: Text('selectedDate',
+                      child: Text('${selectedDate.day}-${selectedDate.month}-${selectedDate.year}',
                       style :Theme.of(context).textTheme.bodyText1!.copyWith(
                         color: Colors.black
                       )),
@@ -104,20 +104,30 @@ class _ShowModalBottomSheetState extends State<ShowModalBottomSheet> {
     );
   }
 
-  void showDate(){
-    showDatePicker(
+  void showDate()async{
+    var chooseDate =await showDatePicker(
       context: context,
       initialDate: selectedDate,
       firstDate:DateTime.now() ,
-      lastDate: DateTime.now().add(Duration(days: 360)));
+      lastDate: DateTime.now().add(const Duration(days: 360)));
+
+      if(chooseDate != null){
+        selectedDate = chooseDate;
+        setState(() {
+          
+        });
+      }
       
       
    
   }
 
   void getData(){
-    /// validation data
-    formKey.currentState!.validate();
+    /// validation
+    if(formKey.currentState!.validate()){
+      /// insert database
+
+    }
 
   }
  
