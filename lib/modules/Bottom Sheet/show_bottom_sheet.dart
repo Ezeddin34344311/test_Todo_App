@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test_todo_app/layout/home_layout.dart';
 import 'package:test_todo_app/models/tasks_model.dart';
 import 'package:test_todo_app/shared/components/components.dart';
 import '../../utils/add_task.dart';
@@ -132,7 +133,7 @@ class _ShowModalBottomSheetState extends State<ShowModalBottomSheet> {
           descruption: descruption,
           date: selectedDate.millisecondsSinceEpoch);
       // Show Loading Page
-      showLoading(context, 'Loading', isCanceled: false);
+      showLoading(context, 'Loading...', isCanceled: true);
       // Add task From Firestore
       addTasksFromFirestore(task).then(
         (value) {
@@ -140,11 +141,11 @@ class _ShowModalBottomSheetState extends State<ShowModalBottomSheet> {
           showMessage(
             context,
             'Added Successfully','OK',() {
-              Navigator.pop(context);
+              Navigator.popUntil(context, ModalRoute.withName(Home.routeName));
             },
           );
         },
-      );
-    }
+      );  
+    } 
   }
 }

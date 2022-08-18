@@ -4,22 +4,21 @@ import 'package:calendar_timeline/calendar_timeline.dart';
 import 'package:provider/provider.dart';
 import 'package:test_todo_app/models/tasks_model.dart';
 import 'package:test_todo_app/modules/tasks/tasks_item.dart';
-import 'package:test_todo_app/provider/read_data_provider.dart';
+import 'package:test_todo_app/shared/components/components.dart';
 import 'package:test_todo_app/shared/styles/my_Theme.dart';
 import 'package:test_todo_app/utils/add_task.dart';
 
 class Tasks extends StatefulWidget {
- 
   @override
   State<Tasks> createState() => _TasksState();
 }
 
 class _TasksState extends State<Tasks> {
-  var selectDate = DateTime.now();
+  List<TasksModel> tasks = [];
+  DateTime selectDate = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
-    var read_data_provider = Provider.of<ReadDataProvider>(context);
     return Column(
       children: [
         CalendarTimeline(
@@ -27,33 +26,44 @@ class _TasksState extends State<Tasks> {
           firstDate: DateTime.now().subtract(Duration(days: 360)),
           lastDate: DateTime.now().add(Duration(days: 360)),
           onDateSelected: (date) {
-            if(date == null) return ;
-
-             selectDate= date ;
-             setState(() {
-               
-             });
+            if (selectDate == null) return;
+            selectDate = date;
+            setState(() {
+              
+            });
           },
           leftMargin: 20,
           monthColor: MyTheme.blackColor,
           dayColor: MyTheme.blackColor,
           activeDayColor: Colors.white,
           activeBackgroundDayColor: MyTheme.pryColor,
-          
         ),
-        const SizedBox(height: 20,),
+        const SizedBox(
+          height: 20,
+        ),
         Expanded(
-          child: FutureBuilder<QuerySnapshot<TasksModel>>(
-            future: getTasksTromFirestore(selectDate),
+          child: StreamBuilder<QuerySnapshot<TasksModel>>(
+            stream: getTasksTromFirestore(selectDate),
             builder: (context, snapshot) {
-          
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              }
+              if (snapshot.hasError) {
+                return const Text('Something went wrong');
+              }
+              tasks = snapshot.data?.docs.map((e) => e.data()).toList() ?? [];
+
               return ListView.separated(
                 separatorBuilder: (context, index) {
-                  return SizedBox(height: 20,);
+                  return const SizedBox(
+                    height: 20,
+                  );
                 },
-                itemBuilder:  (context, index) {
-                return TasksItem(read_data_provider.tasks[index]);
-              },itemCount: read_data_provider.tasks.length,);
+                itemBuilder: (context, index) {
+                  return TasksItem(tasks[index]);
+                },
+                itemCount: tasks.length,
+              );
             },
           ),
         )

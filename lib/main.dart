@@ -2,20 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:test_todo_app/layout/home_layout.dart';
-import 'package:test_todo_app/provider/read_data_provider.dart';
 import 'package:test_todo_app/shared/styles/my_Theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main()async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  //await FirebaseFirestore.instance.disableNetwork();
-  runApp(MultiProvider(
-    providers: [
-      ChangeNotifierProvider(
-        create: (context) => ReadDataProvider(),)
-    ],
-    child: MyApp()));
+  await FirebaseFirestore.instance.disableNetwork();
+  runApp(MyApp());
   
 }
 

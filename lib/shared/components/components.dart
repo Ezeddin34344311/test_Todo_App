@@ -9,9 +9,7 @@ void showLoading(BuildContext context, String message,
       context: context,
       builder: ((context) {
         return AlertDialog(
-          content: CircularProgressIndicator(
-            strokeWidth: 2,
-          ),
+          content: CircularProgressIndicator(),
         );
       }));
 }
