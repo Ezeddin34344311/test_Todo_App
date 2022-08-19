@@ -1,0 +1,20 @@
+{
+    "todo_app": "قائمة المهام",
+    "setting_title" : "الاعدادات",
+    "bottom_sheet_english": "الإنكليزية",
+    "bottom_sheet_arabic": "العربية",
+    "bottom_sheet_language": "اللغة",
+    "settings_language" : "اللغة",
+    "settings_theming" : "ألوان التطبيق",
+    "bottom_sheet_light" : "اللون الأبيض",
+    "bottom_sheet_dark" : "اللون الأسود",
+    "add_new_task" : "أضف مهمة جديدة",
+    "task_name" : "اكتب إسم المهمة",
+    "description" : "اكتب وصفا للمهمة",
+    "select_time" : "حدد الوقت",
+    "add_task" : "أضف مهمة",
+    "erreur_task_name" : "من فضلك أدخل إسم مهمتك",
+    "erreur_descipton" : "من فضلك أدخل وصفك",
+    "is_done" : "منته !",
+    "delete" : "حذف"
+}

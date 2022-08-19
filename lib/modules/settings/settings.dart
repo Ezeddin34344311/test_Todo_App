@@ -1,59 +1,103 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:test_todo_app/modules/settings/Theme/bottom_sheet_item_them.dart';
+import 'package:test_todo_app/provider/theme_provider.dart';
 import 'package:test_todo_app/shared/styles/my_Theme.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../provider/language_provider.dart';
+import 'language/bottom_sheet_item_lang.dart';
 
-class Settings extends StatelessWidget {
+class Settings extends StatefulWidget {
+  @override
+  State<Settings> createState() => _SettingsState();
+}
+
+class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
+    var theme = Provider.of<ThemeProvider>(context);
+    var language = Provider.of<LanguageProvider>(context);
     return Scaffold(
-     
       body: Container(
-        margin: EdgeInsets.all(20),
-        padding: EdgeInsets.all(12),
+        margin:const  EdgeInsets.all(20),
+        padding: const  EdgeInsets.all(12),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text('Language',
+            Text(AppLocalizations.of(context)!.settings_language,
             style: Theme.of(context).textTheme.headline2!.
-            copyWith(color: MyTheme.blackColor),),
-            SizedBox(height: 20,),
+            copyWith(color: theme.initTheme ==ThemeMode.light ? MyTheme.blackColor
+                    : MyTheme.whiteColor,),),
+            const SizedBox(height: 20,),
             TextButton(
               style: TextButton.styleFrom(
-                backgroundColor: MyTheme.whiteColor,
-                padding: EdgeInsets.all(12),
+                backgroundColor: theme.initTheme ==ThemeMode.light ? MyTheme.whiteColor
+                    : MyTheme.backbottomNavi,
+                padding: const EdgeInsets.all(12),
                 shape: RoundedRectangleBorder(
                   side:BorderSide(
                     color: MyTheme.pryColor
                   ) ),
               ),
-              onPressed: () {},
+              onPressed: languageBottomSheet,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [Text('English'), Icon(Icons.check_sharp)],
+                children: [ 
+                  Text( 
+                    // language
+                    language.initLocale == 'en' ?
+                    AppLocalizations.of(context)!.bottom_sheet_english 
+                    : AppLocalizations.of(context)!.bottom_sheet_arabic ,
+                          style: Theme.of(context).textTheme.subtitle1!
+                          .copyWith(color: MyTheme.pryColor),),
+                 Image.asset(theme.initTheme == ThemeMode.light
+                        ? 'assets/images/baseline_black.png'
+                        : 'assets/images/baseline_white.png')],
               ),
             ),
-            SizedBox(height: 25,),
-            Text('Thiming',
+            const SizedBox(height: 25,),
+            Text(AppLocalizations.of(context)!.settings_theming,
             style: Theme.of(context).textTheme.headline2!.
-            copyWith(color: MyTheme.blackColor),),
-            SizedBox(height: 20,),
+            copyWith(color: theme.initTheme ==ThemeMode.light ? MyTheme.blackColor
+                    : MyTheme.whiteColor,),),
+            const SizedBox(height: 20,),
             TextButton(
               style: TextButton.styleFrom(
-                backgroundColor: MyTheme.whiteColor,
-                padding: EdgeInsets.all(12),
+                backgroundColor: theme.initTheme ==ThemeMode.light ? MyTheme.whiteColor
+                    : MyTheme.backbottomNavi,
+                padding:const  EdgeInsets.all(12),
                 shape: RoundedRectangleBorder(
                   side:BorderSide(
                     color: MyTheme.pryColor
                   ) ),
               ),
-              onPressed: () {},
+              onPressed: () => themeBottomSheet(),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [Text('Light'), Icon(Icons.check_sharp)],
+                children: [Text(
+                  language.initLocale == 'en' ?
+                  AppLocalizations.of(context)!.bottom_sheet_light
+                    : AppLocalizations.of(context)!.bottom_sheet_dark ,),
+                 Image.asset(theme.initTheme == ThemeMode.light
+                        ? 'assets/images/baseline_black.png'
+                        : 'assets/images/baseline_white.png')],
               ),
             ),
           ],
         ),
       ),
     );
+  }
+
+  Widget? languageBottomSheet(){
+    showModalBottomSheet(
+      context: context, 
+      builder: ((context) => BottomSheetItemLang()));
+  }
+
+  Widget? themeBottomSheet(){
+    showModalBottomSheet(
+      context: context, 
+      builder: ((context) => ShowBottomSheetItemTheme()));
   }
 }

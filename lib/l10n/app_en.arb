@@ -1,0 +1,20 @@
+{
+    "todo_app": "To Do List",
+    "setting_title" : "Settings",
+    "bottom_sheet_english": "English ",
+    "bottom_sheet_arabic": "Arabic ",
+    "bottom_sheet_language": "Language",
+    "settings_language" : "Language",
+    "settings_theming" : "Theming",
+    "bottom_sheet_light" : "Light Mode",
+    "bottom_sheet_dark" : "Dark Mode",
+    "add_new_task" : "Add  new Task",
+    "task_name" : "Enter task name",
+    "description" : "Enter description",
+    "select_time" : "Select Time",
+    "add_task" : "Add Task",
+    "erreur_task_name" : "Plz enter your task name",
+    "erreur_descipton" : "Plz enter your descruption",
+    "is_done" : "Done !",
+    "delete" : "Delete"
+}
