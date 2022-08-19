@@ -4,18 +4,21 @@ import 'package:test_todo_app/models/tasks_model.dart';
 import 'package:test_todo_app/shared/components/components.dart';
 import '../../utils/add_task.dart';
 
-class ShowModalBottomSheet extends StatefulWidget {
-  const ShowModalBottomSheet({Key? key}) : super(key: key);
+class ShowModalBottomSheetAdd extends StatefulWidget {
+  const ShowModalBottomSheetAdd({Key? key}) : super(key: key);
 
   @override
-  State<ShowModalBottomSheet> createState() => _ShowModalBottomSheetState();
+  State<ShowModalBottomSheetAdd> createState() =>
+      _ShowModalBottomSheetAddState();
 }
 
-class _ShowModalBottomSheetState extends State<ShowModalBottomSheet> {
-  String taskName = '';
-  String descruption = '';
+class _ShowModalBottomSheetAddState extends State<ShowModalBottomSheetAdd> {
+  
   var selectedDate = DateTime.now();
   var formKey = GlobalKey<FormState>();
+
+  TextEditingController taskName = TextEditingController();
+  TextEditingController descruption = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -38,9 +41,7 @@ class _ShowModalBottomSheetState extends State<ShowModalBottomSheet> {
               child: Column(
                 children: [
                   TextFormField(
-                    onChanged: (text) {
-                      taskName = text;
-                    },
+                    controller:  taskName,
                     validator: (text) {
                       if (text == null || text.isEmpty) {
                         return 'Plz enter your task name';
@@ -59,9 +60,7 @@ class _ShowModalBottomSheetState extends State<ShowModalBottomSheet> {
                     height: 20,
                   ),
                   TextFormField(
-                    onChanged: (text) {
-                      descruption = text;
-                    },
+                    controller: descruption,
                     validator: (text) {
                       if (text == null || text.isEmpty) {
                         return 'Plz enter your descruption';
@@ -129,23 +128,28 @@ class _ShowModalBottomSheetState extends State<ShowModalBottomSheet> {
     if (formKey.currentState!.validate()) {
       /// insert database
       TasksModel task = TasksModel(
-          taskName: taskName,
-          descruption: descruption,
-          date: selectedDate.millisecondsSinceEpoch);
+          taskName: taskName.text,
+          descruption: descruption.text,
+          date: DateUtils.dateOnly(selectedDate).millisecondsSinceEpoch);
+
       // Show Loading Page
-      showLoading(context, 'Loading...', isCanceled: true);
+      showLoading(
+        context, 'Looding...'
+      );
       // Add task From Firestore
       addTasksFromFirestore(task).then(
         (value) {
           hideLoading(context);
           showMessage(
             context,
-            'Added Successfully','OK',() {
+            'Added Successfully',
+            'OK',
+            () {
               Navigator.popUntil(context, ModalRoute.withName(Home.routeName));
             },
           );
         },
-      );  
-    } 
+      );
+    }
   }
 }

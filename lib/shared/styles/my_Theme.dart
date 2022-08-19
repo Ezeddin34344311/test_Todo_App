@@ -18,7 +18,7 @@ class MyTheme{
         color: whiteColor
       ),
       backgroundColor: pryColor,
-      toolbarHeight: 100,
+      toolbarHeight: 160,
     ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: pryColor,

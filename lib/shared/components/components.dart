@@ -2,14 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:test_todo_app/shared/styles/my_Theme.dart';
 
 // Fonction to Loading page
-void showLoading(BuildContext context, String message,
-    {bool isCanceled = true}) {
+void showLoading(BuildContext context,String message) {
   showDialog(
-      barrierDismissible: isCanceled,
       context: context,
       builder: ((context) {
         return AlertDialog(
-          content: CircularProgressIndicator(),
+          content: Row(
+            children: [
+              CircularProgressIndicator(),
+              SizedBox( width:  20,),
+              Text(message)
+            ],
+          ),
         );
       }));
 }

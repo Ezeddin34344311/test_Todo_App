@@ -22,9 +22,6 @@ Future<void> addTasksFromFirestore(TasksModel task) {
   return docRef.set(task);
 }
 
-
-// Fonction Add Document and Read Data
-
   Stream<QuerySnapshot<TasksModel>> getTasksTromFirestore(DateTime date){
 
   var collection =addCollectionForFirestore();
@@ -34,9 +31,26 @@ Future<void> addTasksFromFirestore(TasksModel task) {
 
  }
 
-// Fonction Add Document and Read Data
+
+// Fonction delete Data
 
  Future<void> deleteTasksFromFirestore(TasksModel task) {
   return addCollectionForFirestore().doc(task.id).delete();
   
 }
+
+
+// Fonction Update Data
+
+Future<void> updateTasksFromFirestore(TasksModel task){
+
+  return addCollectionForFirestore().doc().update(
+    {
+    task.id : addCollectionForFirestore().doc().id,
+    'taskName' : task.taskName,
+    'descruption' : task.descruption,
+    'date' : task.date
+  });
+}
+
+
