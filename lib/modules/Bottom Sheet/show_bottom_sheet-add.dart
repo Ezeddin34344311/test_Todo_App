@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:test_todo_app/layout/home_layout.dart';
 import 'package:test_todo_app/models/tasks_model.dart';
 import 'package:test_todo_app/shared/components/components.dart';
+import 'package:test_todo_app/shared/styles/my_Theme.dart';
+import '../../provider/language_provider.dart';
+import '../../provider/theme_provider.dart';
 import '../../utils/add_task.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ShowModalBottomSheetAdd extends StatefulWidget {
   const ShowModalBottomSheetAdd({Key? key}) : super(key: key);
@@ -21,6 +26,8 @@ class _ShowModalBottomSheetAddState extends State<ShowModalBottomSheetAdd> {
   TextEditingController descruption = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    var language = Provider.of<LanguageProvider>(context);
+    var theme = Provider.of<ThemeProvider>(context);
     return SingleChildScrollView(
       child: Container(
         margin: const EdgeInsets.all(20),
@@ -29,7 +36,7 @@ class _ShowModalBottomSheetAddState extends State<ShowModalBottomSheetAdd> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              'Add new Task',
+              AppLocalizations.of(context)!.add_new_task,
               style: Theme.of(context).textTheme.subtitle1,
               textAlign: TextAlign.center,
             ),
@@ -44,16 +51,17 @@ class _ShowModalBottomSheetAddState extends State<ShowModalBottomSheetAdd> {
                     controller:  taskName,
                     validator: (text) {
                       if (text == null || text.isEmpty) {
-                        return 'Plz enter your task name';
+                        return AppLocalizations.of(context)!.erreur_task_name ;
                       }
                       return null;
                     },
                     decoration: InputDecoration(
-                      hintText: 'Enter  task name',
+                      hintText: AppLocalizations.of(context)!.task_name ,
                       hintStyle: Theme.of(context)
                           .textTheme
                           .bodyText1!
-                          .copyWith(color: Colors.black54),
+                          .copyWith(color:theme.initTheme == ThemeMode.light ? Colors.black54
+                                         : Colors.white54 ,),
                     ),
                   ),
                   const SizedBox(
@@ -63,18 +71,19 @@ class _ShowModalBottomSheetAddState extends State<ShowModalBottomSheetAdd> {
                     controller: descruption,
                     validator: (text) {
                       if (text == null || text.isEmpty) {
-                        return 'Plz enter your descruption';
+                        return AppLocalizations.of(context)!.erreur_descipton;
                       }
                       return null;
                     },
                     maxLines: 4,
                     minLines: 4,
                     decoration: InputDecoration(
-                      hintText: 'Enter  descruption',
+                      hintText: AppLocalizations.of(context)!.description,
                       hintStyle: Theme.of(context)
                           .textTheme
                           .bodyText1!
-                          .copyWith(color: Colors.black54),
+                          .copyWith(color:  theme.initTheme == ThemeMode.light ? Colors.black54
+                                         : Colors.white54 ,),
                     ),
                   ),
                 ],
@@ -83,7 +92,7 @@ class _ShowModalBottomSheetAddState extends State<ShowModalBottomSheetAdd> {
             const SizedBox(
               height: 20,
             ),
-            Text('Select time', style: Theme.of(context).textTheme.subtitle1),
+            Text(AppLocalizations.of(context)!.select_time, style: Theme.of(context).textTheme.subtitle1),
             const SizedBox(
               height: 20,
             ),
@@ -97,13 +106,14 @@ class _ShowModalBottomSheetAddState extends State<ShowModalBottomSheetAdd> {
                     style: Theme.of(context)
                         .textTheme
                         .bodyText1!
-                        .copyWith(color: Colors.black)),
+                        .copyWith(color:theme.initTheme == ThemeMode.light ? MyTheme.blackColor
+                     : MyTheme.whiteColor,)),
               ),
             ),
             const SizedBox(
               height: 20,
             ),
-            ElevatedButton(onPressed: setData, child: const Text('Add Task')),
+            ElevatedButton(onPressed: setData, child:  Text(AppLocalizations.of(context)!.add_task)),
           ],
         ),
       ),
@@ -115,7 +125,8 @@ class _ShowModalBottomSheetAddState extends State<ShowModalBottomSheetAdd> {
         context: context,
         initialDate: selectedDate,
         firstDate: DateTime.now(),
-        lastDate: DateTime.now().add(const Duration(days: 360)));
+        lastDate: DateTime.now().add(const Duration(days: 360)),
+        );
 
     if (chooseDate != null) {
       selectedDate = chooseDate;

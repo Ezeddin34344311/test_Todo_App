@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:test_todo_app/models/tasks_model.dart';
-import 'package:test_todo_app/modules/Bottom%20Sheet/show_bottom_sheet-add.dart';
 import 'package:test_todo_app/modules/edit_screen.dart';
 import 'package:test_todo_app/shared/styles/my_Theme.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:test_todo_app/utils/add_task.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../provider/language_provider.dart';
+import '../../provider/theme_provider.dart';
 
 class TasksItem extends StatefulWidget {
   TasksModel taskmodel;
@@ -20,6 +23,8 @@ class _TasksItemState extends State<TasksItem> {
 
   @override
   Widget build(BuildContext context) {
+    var theme = Provider.of<ThemeProvider>(context);
+    var language = Provider.of<LanguageProvider>(context);
     return  Container(
       child: InkWell(
         onTap: isclicked == false? (() {
@@ -42,11 +47,13 @@ class _TasksItemState extends State<TasksItem> {
                   backgroundColor: Color(0xFFFE4A49),
                   foregroundColor: Colors.white,
                   icon: Icons.delete,
-                  label: 'Delete',
+                  label: AppLocalizations.of(context)!.delete,
                 )
               ],
             ),
             child: Card(
+              color: theme.initTheme == ThemeMode.light ? MyTheme.whiteColor
+                     : MyTheme.backbottomNavi ,
               shape:
                   RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
               // ,
@@ -88,7 +95,8 @@ class _TasksItemState extends State<TasksItem> {
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyText1!
-                                    .copyWith(color: MyTheme.blackColor)),
+                                    .copyWith(color: theme.initTheme == ThemeMode.light ? MyTheme.blackColor
+                                                     : MyTheme.whiteColor ,)),
                           ],
                         ),
                       ],
@@ -112,7 +120,7 @@ class _TasksItemState extends State<TasksItem> {
                               ),
                             )
                           : Text(
-                              'Done!',
+                              AppLocalizations.of(context)!.is_done,
                               style: Theme.of(context)
                                   .textTheme
                                   .headline1!

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:test_todo_app/modules/Bottom%20Sheet/show_bottom_sheet-add.dart';
 import 'package:test_todo_app/shared/styles/my_Theme.dart';
 import '../modules/settings/settings.dart';
 import '../modules/tasks/tasks.dart';
+import '../provider/language_provider.dart';
+import '../provider/theme_provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 
 class Home extends StatefulWidget {
@@ -16,12 +20,19 @@ class _HomeState extends State<Home> {
   int currentIndex = 0 ;
   @override
   Widget build(BuildContext context) {
+    var theme = Provider.of<ThemeProvider>(context);
+    var language = Provider.of<LanguageProvider>(context);
     return Scaffold(
+      backgroundColor: theme.initTheme == ThemeMode.light ? MyTheme.backColor
+                     : MyTheme.backAndColorDark ,
       appBar: AppBar(
-        title: Text(currentIndex == 0 ?'To Do List ':'Settings ', 
+        title: Text(currentIndex == 0 ? AppLocalizations.of(context)!.todo_app
+             :AppLocalizations.of(context)!.setting_title, 
         style: Theme.of(context).textTheme.headline1,),
       ),
       bottomNavigationBar: BottomAppBar(
+        color: theme.initTheme == ThemeMode.light ? MyTheme.whiteColor
+                     : MyTheme.backbottomNavi ,
         shape: const  CircularNotchedRectangle(),
         notchMargin: 6,
         child: BottomNavigationBar(

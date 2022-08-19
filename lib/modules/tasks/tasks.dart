@@ -4,9 +4,10 @@ import 'package:calendar_timeline/calendar_timeline.dart';
 import 'package:provider/provider.dart';
 import 'package:test_todo_app/models/tasks_model.dart';
 import 'package:test_todo_app/modules/tasks/tasks_item.dart';
-import 'package:test_todo_app/shared/components/components.dart';
 import 'package:test_todo_app/shared/styles/my_Theme.dart';
 import 'package:test_todo_app/utils/add_task.dart';
+
+import '../../provider/theme_provider.dart';
 
 class Tasks extends StatefulWidget {
   @override
@@ -19,6 +20,7 @@ class _TasksState extends State<Tasks> {
 
   @override
   Widget build(BuildContext context) {
+    var theme = Provider.of<ThemeProvider>(context);
     return Column(
       children: [
         CalendarTimeline(
@@ -33,10 +35,15 @@ class _TasksState extends State<Tasks> {
             });
           },
           leftMargin: 20,
-          monthColor: MyTheme.blackColor,
-          dayColor: MyTheme.blackColor,
-          activeDayColor: Colors.white,
-          activeBackgroundDayColor: MyTheme.pryColor,
+          monthColor: theme.initTheme ==ThemeMode.light ? MyTheme.blackColor
+                    : MyTheme.whiteColor,
+          dayColor: theme.initTheme ==ThemeMode.light ? MyTheme.blackColor
+                    : MyTheme.whiteColor,
+          activeDayColor: theme.initTheme ==ThemeMode.light ? MyTheme.backAndColorDark
+                    : MyTheme.whiteColor,
+          activeBackgroundDayColor: theme.initTheme ==ThemeMode.light ? MyTheme.whiteColor
+                    : MyTheme.backbottomNavi,
+
         ),
         const SizedBox(
           height: 20,
