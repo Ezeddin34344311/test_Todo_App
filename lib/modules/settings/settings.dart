@@ -5,6 +5,7 @@ class Settings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+     
       body: Container(
         margin: EdgeInsets.all(20),
         padding: EdgeInsets.all(12),
