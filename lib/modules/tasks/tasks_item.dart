@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:test_todo_app/models/tasks_model.dart';
 import 'package:test_todo_app/modules/edit_screen.dart';
+import 'package:test_todo_app/shared/components/components.dart';
 import 'package:test_todo_app/shared/styles/my_Theme.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:test_todo_app/utils/add_task.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../layout/home_layout.dart';
 import '../../provider/language_provider.dart';
 import '../../provider/theme_provider.dart';
 
@@ -20,17 +22,25 @@ class TasksItem extends StatefulWidget {
 
 class _TasksItemState extends State<TasksItem> {
   bool isclicked = false;
+  late NavigatorState navigator;
+
+  @override
+  void didChangeDependencies() {
+    navigator = Navigator.of(context);
+  }
 
   @override
   Widget build(BuildContext context) {
     var theme = Provider.of<ThemeProvider>(context);
     var language = Provider.of<LanguageProvider>(context);
-    return  Container(
+    return Container(
       child: InkWell(
-        onTap: isclicked == false? (() {
-          Navigator.pushNamed(context, EditScreen.routeName,
-              arguments: widget.taskmodel);
-        }) : (){},   
+        onTap: isclicked == false
+            ? (() {
+                Navigator.pushNamed(context, EditScreen.routeName,
+                    arguments: widget.taskmodel);
+              })
+            : () {},
         child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 20),
           child: Slidable(
@@ -40,8 +50,18 @@ class _TasksItemState extends State<TasksItem> {
               children: [
                 SlidableAction(
                   onPressed: (context) {
-                    deleteTasksFromFirestore(widget.taskmodel);
-                    setState(() {});
+                    showMessage(
+                        context,
+                        AppLocalizations.of(context)!.message_comp_delete,
+                        AppLocalizations.of(context)!.posAction_components,
+                        (() {
+                      deleteTask();
+                      navigator.pop(context);
+                    }),
+                        negActionText:
+                            AppLocalizations.of(context)!.negAction_components,
+                        negAction: () => navigator.pop(context),
+                        isCancel: true);
                   },
                   borderRadius: BorderRadius.circular(12),
                   backgroundColor: Color(0xFFFE4A49),
@@ -52,10 +72,11 @@ class _TasksItemState extends State<TasksItem> {
               ],
             ),
             child: Card(
-              color: theme.initTheme == ThemeMode.light ? MyTheme.whiteColor
-                     : MyTheme.backbottomNavi ,
-              shape:
-                  RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+              color: theme.initTheme == ThemeMode.light
+                  ? MyTheme.whiteColor
+                  : MyTheme.backbottomNavi,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
               // ,
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
@@ -95,8 +116,11 @@ class _TasksItemState extends State<TasksItem> {
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyText1!
-                                    .copyWith(color: theme.initTheme == ThemeMode.light ? MyTheme.blackColor
-                                                     : MyTheme.whiteColor ,)),
+                                    .copyWith(
+                                      color: theme.initTheme == ThemeMode.light
+                                          ? MyTheme.blackColor
+                                          : MyTheme.whiteColor,
+                                    )),
                           ],
                         ),
                       ],
@@ -135,5 +159,10 @@ class _TasksItemState extends State<TasksItem> {
         ),
       ),
     );
+  }
+
+  void deleteTask() {
+    deleteTasksFromFirestore(widget.taskmodel);
+    setState(() {});
   }
 }

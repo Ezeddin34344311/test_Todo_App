@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:test_todo_app/shared/styles/my_Theme.dart';
+
+
+
+
 
 // Fonction to Loading page
 void showLoading(BuildContext context,String message) {
@@ -29,15 +32,27 @@ void showMessage(
   String message,
   String posActionText,
   VoidCallback posAction,
+  {String? negActionText,
+  VoidCallback? negAction,
+  bool isCancel = false}
 ) {
+  List <Widget> actions = [
+          TextButton(onPressed: posAction, child: Text(posActionText)),
+        ];
+        if(negAction !=  null || negActionText != null){
+          actions.add(TextButton(
+            onPressed: negAction, 
+            child: Text(negActionText!,
+            )));
+        }
+
   showDialog(
+    barrierDismissible: isCancel,
     context: context,
     builder: ((context) {
       return AlertDialog(
         content: Text(message),
-        actions: [
-          TextButton(onPressed: posAction, child: Text(posActionText)),
-        ],
+        actions: actions,
       );
     }),
   );

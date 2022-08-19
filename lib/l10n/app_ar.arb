@@ -13,8 +13,15 @@
     "description" : "اكتب وصفا للمهمة",
     "select_time" : "حدد الوقت",
     "add_task" : "أضف مهمة",
+    "edit_task" : "تحرير المهمة",
+    "save_change" : "احفظ التغير",
     "erreur_task_name" : "من فضلك أدخل إسم مهمتك",
     "erreur_descipton" : "من فضلك أدخل وصفك",
     "is_done" : "منته !",
-    "delete" : "حذف"
+    "delete" : "حذف",
+    "message_comp_delete" : " هل تريد بالتأكيد حذف هذه المهمة ؟",
+    "message_comp_add" : "تمت الاضافة بنجاح",
+    "posAction_components" : "نعم",
+    "negAction_components" : "لا",
+    "loading" : "تحميل ... "
 }
