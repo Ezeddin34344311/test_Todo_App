@@ -13,8 +13,15 @@
     "description" : "Enter description",
     "select_time" : "Select Time",
     "add_task" : "Add Task",
+    "edit_task" : "Edit Task",
+    "save_change" : "Save Change",
     "erreur_task_name" : "Plz enter your task name",
     "erreur_descipton" : "Plz enter your descruption",
     "is_done" : "Done !",
-    "delete" : "Delete"
+    "delete" : "Delete",
+    "message_comp_delete" : "Are you sure want to delete this task ?",
+    "message_comp_add" : "Added Successfully",
+    "posAction_components" : "Yes",
+    "negAction_components" : "No",
+    "loading" : "loading ..."
 }

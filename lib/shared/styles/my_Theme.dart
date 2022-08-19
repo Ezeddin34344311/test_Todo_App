@@ -64,7 +64,14 @@ class MyTheme{
     iconTheme: IconThemeData(
       color: backAndColorDark
     ),
+    dialogTheme:DialogTheme(
+      backgroundColor: whiteColor,
+      titleTextStyle: TextStyle(color: whiteColor)
+      
+    ) ,
   );
+
+
 
 
   static ThemeData darkMode = ThemeData(
@@ -120,6 +127,10 @@ class MyTheme{
     iconTheme: IconThemeData(
       color: whiteColor
     ),
+    dialogTheme:DialogTheme(
+      backgroundColor: backbottomNavi,
+      titleTextStyle: TextStyle(color: whiteColor)
+    )
   
   );
 

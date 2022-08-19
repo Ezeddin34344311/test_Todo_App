@@ -145,7 +145,7 @@ class _ShowModalBottomSheetAddState extends State<ShowModalBottomSheetAdd> {
 
       // Show Loading Page
       showLoading(
-        context, 'Looding...'
+        context, AppLocalizations.of(context)!.loading,
       );
       // Add task From Firestore
       addTasksFromFirestore(task).then(
@@ -153,8 +153,8 @@ class _ShowModalBottomSheetAddState extends State<ShowModalBottomSheetAdd> {
           hideLoading(context);
           showMessage(
             context,
-            'Added Successfully',
-            'OK',
+            AppLocalizations.of(context)!.message_comp_add,
+            AppLocalizations.of(context)!.posAction_components,
             () {
               Navigator.popUntil(context, ModalRoute.withName(Home.routeName));
             },
