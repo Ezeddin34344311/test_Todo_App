@@ -18,11 +18,11 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Todo App',
+        title: Text(currentIndex == 0 ?'To Do List ':'Settings ', 
         style: Theme.of(context).textTheme.headline1,),
       ),
       bottomNavigationBar: BottomAppBar(
-        shape: CircularNotchedRectangle(),
+        shape: const  CircularNotchedRectangle(),
         notchMargin: 6,
         child: BottomNavigationBar(
           onTap: (index){
@@ -43,7 +43,7 @@ class _HomeState extends State<Home> {
         onPressed: () {
           addTask();
         },
-        child:Icon(Icons.add),
+         child: Icon(Icons.add),
         backgroundColor: MyTheme.pryColor,
       ) ,
 
@@ -57,7 +57,7 @@ class _HomeState extends State<Home> {
     showModalBottomSheet(
       context: context,
        builder: ((context){
-        return ShowModalBottomSheetAdd();
+        return const ShowModalBottomSheetAdd();
        }));
   }
 }
