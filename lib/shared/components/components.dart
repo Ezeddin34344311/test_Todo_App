@@ -12,8 +12,8 @@ void showLoading(BuildContext context,String message) {
         return AlertDialog(
           content: Row(
             children: [
-              CircularProgressIndicator(),
-              SizedBox( width:  20,),
+              const CircularProgressIndicator(),
+              const SizedBox( width:  20,),
               Text(message)
             ],
           ),

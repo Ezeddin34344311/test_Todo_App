@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:test_todo_app/provider/language_provider.dart';
 import 'package:test_todo_app/provider/theme_provider.dart';
-import 'package:test_todo_app/shared/styles/my_Theme.dart';
+import 'package:test_todo_app/shared/styles/my_theme.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 
+// ignore: use_key_in_widget_constructors
 class ShowBottomSheetItemTheme extends StatefulWidget {
   @override
   State<ShowBottomSheetItemTheme> createState() =>
@@ -15,6 +16,7 @@ class ShowBottomSheetItemTheme extends StatefulWidget {
 class _ShowBottomSheetItemThemeState extends State<ShowBottomSheetItemTheme> {
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
     var language = Provider.of<LanguageProvider>(context);
     var theme = Provider.of<ThemeProvider>(context);
     return Column(
@@ -22,7 +24,7 @@ class _ShowBottomSheetItemThemeState extends State<ShowBottomSheetItemTheme> {
       children: [
         Center(
           child: Container(
-            margin: EdgeInsets.all(12),
+            margin: const EdgeInsets.all(12),
             height: 8,
             width: 40,
             decoration: BoxDecoration(

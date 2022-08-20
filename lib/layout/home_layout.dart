@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:test_todo_app/modules/Bottom%20Sheet/show_bottom_sheet-add.dart';
-import 'package:test_todo_app/shared/styles/my_Theme.dart';
+import 'package:test_todo_app/shared/styles/my_theme.dart';
 import '../modules/settings/settings.dart';
 import '../modules/tasks/tasks.dart';
 import '../provider/language_provider.dart';
@@ -9,6 +9,7 @@ import '../provider/theme_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 
+// ignore: use_key_in_widget_constructors
 class Home extends StatefulWidget {
   static const String routeName = 'Home';
 
@@ -21,6 +22,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     var theme = Provider.of<ThemeProvider>(context);
+    // ignore: unused_local_variable
     var language = Provider.of<LanguageProvider>(context);
     return Scaffold(
       backgroundColor: theme.initTheme == ThemeMode.light ? MyTheme.backColor
@@ -54,7 +56,8 @@ class _HomeState extends State<Home> {
         onPressed: () {
           addTask();
         },
-         child: Icon(Icons.add),
+        // ignore: sort_child_properties_last
+        child: const Icon(Icons.add),
         backgroundColor: MyTheme.pryColor,
       ) ,
 
@@ -70,5 +73,6 @@ class _HomeState extends State<Home> {
        builder: ((context){
         return const ShowModalBottomSheetAdd();
        }));
+    return null;
   }
 }

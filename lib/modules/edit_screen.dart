@@ -3,11 +3,12 @@ import 'package:provider/provider.dart';
 import 'package:test_todo_app/models/tasks_model.dart';
 import 'package:test_todo_app/shared/components/components.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:test_todo_app/shared/styles/my_Theme.dart';
+import 'package:test_todo_app/shared/styles/my_theme.dart';
 import 'package:test_todo_app/utils/add_task.dart';
 import '../provider/language_provider.dart';
 import '../provider/theme_provider.dart';
 
+// ignore: use_key_in_widget_constructors
 class EditScreen extends StatefulWidget {
   static const String routeName = 'Show Bottom Sheet Edit';
 
@@ -25,6 +26,7 @@ class _EditScreenState extends State<EditScreen> {
   @override
   Widget build(BuildContext context) {
     var theme = Provider.of<ThemeProvider>(context);
+    // ignore: unused_local_variable
     var language = Provider.of<LanguageProvider>(context);
     //manipulation data a partir du Navigator
     var editData = ModalRoute.of(context)!.settings.arguments as TasksModel;
@@ -147,6 +149,7 @@ class _EditScreenState extends State<EditScreen> {
                     ),
                     ElevatedButton(
                       onPressed: () => updateData(),
+                      // ignore: sort_child_properties_last
                       child: Text(AppLocalizations.of(context)!.save_change,
                           style: Theme.of(context)
                               .textTheme
@@ -198,7 +201,8 @@ class _EditScreenState extends State<EditScreen> {
         showMessage(
             context, 'Tasks is Update', 'OK', () => Navigator.pop(context));
       }).onError((error, stackTrace) {
-        print(error);
+         // ignore: avoid_print
+         print(error);
       });
     }
   }

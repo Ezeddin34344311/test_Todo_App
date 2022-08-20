@@ -1,9 +1,10 @@
+// ignore_for_file: file_names
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:test_todo_app/layout/home_layout.dart';
 import 'package:test_todo_app/models/tasks_model.dart';
 import 'package:test_todo_app/shared/components/components.dart';
-import 'package:test_todo_app/shared/styles/my_Theme.dart';
+import 'package:test_todo_app/shared/styles/my_theme.dart';
 import '../../provider/language_provider.dart';
 import '../../provider/theme_provider.dart';
 import '../../utils/add_task.dart';
@@ -26,6 +27,7 @@ class _ShowModalBottomSheetAddState extends State<ShowModalBottomSheetAdd> {
   TextEditingController descruption = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
     var language = Provider.of<LanguageProvider>(context);
     var theme = Provider.of<ThemeProvider>(context);
     return SingleChildScrollView(

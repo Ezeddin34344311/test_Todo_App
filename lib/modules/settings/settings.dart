@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:test_todo_app/modules/settings/Theme/bottom_sheet_item_them.dart';
 import 'package:test_todo_app/provider/theme_provider.dart';
-import 'package:test_todo_app/shared/styles/my_Theme.dart';
+import 'package:test_todo_app/shared/styles/my_theme.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../provider/language_provider.dart';
 import 'language/bottom_sheet_item_lang.dart';
 
+// ignore: use_key_in_widget_constructors
 class Settings extends StatefulWidget {
   @override
   State<Settings> createState() => _SettingsState();
@@ -92,12 +93,14 @@ class _SettingsState extends State<Settings> {
   Widget? languageBottomSheet(){
     showModalBottomSheet(
       context: context, 
-      builder: ((context) => BottomSheetItemLang()));
+      builder: ((context) => const BottomSheetItemLang()));
+      return null;
   }
 
   Widget? themeBottomSheet(){
     showModalBottomSheet(
       context: context, 
       builder: ((context) => ShowBottomSheetItemTheme()));
+    return null;
   }
 }

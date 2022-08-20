@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:test_todo_app/provider/language_provider.dart';
-import 'package:test_todo_app/shared/styles/my_Theme.dart';
+import 'package:test_todo_app/shared/styles/my_theme.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 
@@ -22,7 +22,7 @@ class _BottomSheetItemLangState extends State<BottomSheetItemLang> {
       children: [
         Center(
           child: Container(
-            margin: EdgeInsets.all(12),
+            margin:const EdgeInsets.all(12),
             height: 8,
             width: 40,
             decoration: BoxDecoration(
@@ -74,7 +74,7 @@ class _BottomSheetItemLangState extends State<BottomSheetItemLang> {
           ),
         ),
       ],
-    );;
+    );
 
   }
 
@@ -91,7 +91,7 @@ class _BottomSheetItemLangState extends State<BottomSheetItemLang> {
             ),
             Visibility(
               visible: selected,
-              child:  Icon(
+              child:  const Icon(
                 Icons.check,
                 size: 28,
               ),

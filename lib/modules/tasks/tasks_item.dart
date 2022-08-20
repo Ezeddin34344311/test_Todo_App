@@ -3,18 +3,19 @@ import 'package:provider/provider.dart';
 import 'package:test_todo_app/models/tasks_model.dart';
 import 'package:test_todo_app/modules/edit_screen.dart';
 import 'package:test_todo_app/shared/components/components.dart';
-import 'package:test_todo_app/shared/styles/my_Theme.dart';
+import 'package:test_todo_app/shared/styles/my_theme.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:test_todo_app/utils/add_task.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../layout/home_layout.dart';
 import '../../provider/language_provider.dart';
 import '../../provider/theme_provider.dart';
 
+// ignore: must_be_immutable
 class TasksItem extends StatefulWidget {
   TasksModel taskmodel;
 
-  TasksItem(this.taskmodel);
+// ignore: use_key_in_widget_constructors
+TasksItem(this.taskmodel);
 
   @override
   State<TasksItem> createState() => _TasksItemState();
@@ -25,6 +26,7 @@ class _TasksItemState extends State<TasksItem> {
   late NavigatorState navigator;
 
   @override
+  // ignore: must_call_super
   void didChangeDependencies() {
     navigator = Navigator.of(context);
   }
@@ -32,7 +34,9 @@ class _TasksItemState extends State<TasksItem> {
   @override
   Widget build(BuildContext context) {
     var theme = Provider.of<ThemeProvider>(context);
+    // ignore: unused_local_variable
     var language = Provider.of<LanguageProvider>(context);
+    // ignore: avoid_unnecessary_containers
     return Container(
       child: InkWell(
         onTap: isclicked == false
@@ -64,7 +68,7 @@ class _TasksItemState extends State<TasksItem> {
                         isCancel: true);
                   },
                   borderRadius: BorderRadius.circular(12),
-                  backgroundColor: Color(0xFFFE4A49),
+                  backgroundColor:const Color(0xFFFE4A49),
                   foregroundColor: Colors.white,
                   icon: Icons.delete,
                   label: AppLocalizations.of(context)!.delete,

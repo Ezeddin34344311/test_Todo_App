@@ -1,15 +1,17 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 
 class MyTheme{
   
-  static Color pryColor = Color(0XFF5D9CEC);
-  static Color secColor = Color(0XFF61E757);
-  static Color blackColor = Color(0XFF383838);
-  static Color whiteColor = Color(0XFFFFFFFF);
-  static Color redColor = Color(0XFFEC4B4B);
-  static Color backColor = Color(0XFFDFECDB);
-  static Color backAndColorDark = Color(0XFF060E1E);
-  static Color backbottomNavi = Color(0XFF141922);
+  static Color pryColor =const Color(0XFF5D9CEC);
+  static Color secColor =const Color(0XFF61E757);
+  static Color blackColor =const Color(0XFF383838);
+  static Color whiteColor =const Color(0XFFFFFFFF);
+  static Color redColor =const Color(0XFFEC4B4B);
+  static Color backColor =const Color(0XFFDFECDB);
+  static Color backAndColorDark =const Color(0XFF060E1E);
+  static Color backbottomNavi = const Color(0XFF141922);
 
 
 
