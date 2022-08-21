@@ -60,6 +60,7 @@ class _TasksState extends State<Tasks> {
                 return const Text('Something went wrong');
               }
               tasks = snapshot.data?.docs.map((e) => e.data()).toList() ?? [];
+              
 
               return ListView.separated(
                 separatorBuilder: (context, index) {

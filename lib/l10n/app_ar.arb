@@ -20,6 +20,7 @@
     "is_done" : "منته !",
     "delete" : "حذف",
     "message_comp_delete" : " هل تريد بالتأكيد حذف هذه المهمة ؟",
+    "message_comp_update" : "تم تحديث المهمة",
     "message_comp_add" : "تمت الاضافة بنجاح",
     "posAction_components" : "نعم",
     "negAction_components" : "لا",

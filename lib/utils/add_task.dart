@@ -43,14 +43,9 @@ Future<void> addTasksFromFirestore(TasksModel task) {
 // Fonction Update Data
 
 Future<void> updateTasksFromFirestore(TasksModel task){
+  final docTask = addCollectionForFirestore().doc(task.id);
 
-  return addCollectionForFirestore().doc().update(
-    {
-    task.id : addCollectionForFirestore().doc().id,
-    'taskName' : task.taskName,
-    'descruption' : task.descruption,
-    'date' : task.date
-  });
+  return docTask.update(task.toJson());
 }
 
 

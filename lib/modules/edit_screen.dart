@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:test_todo_app/layout/home_layout.dart';
 import 'package:test_todo_app/models/tasks_model.dart';
 import 'package:test_todo_app/shared/components/components.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -17,19 +18,26 @@ class EditScreen extends StatefulWidget {
 }
 
 class _EditScreenState extends State<EditScreen> {
+  // ignore: prefer_typing_uninitialized_variables
+  var editData;
+
   var selectedDate = DateTime.now();
 
   TextEditingController taskName = TextEditingController();
   TextEditingController descruption = TextEditingController();
+
   var formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
+    // provider
     var theme = Provider.of<ThemeProvider>(context);
     // ignore: unused_local_variable
     var language = Provider.of<LanguageProvider>(context);
     //manipulation data a partir du Navigator
-    var editData = ModalRoute.of(context)!.settings.arguments as TasksModel;
+
+    // get data for navigator
+    editData = ModalRoute.of(context)!.settings.arguments as TasksModel;
     taskName.text = editData.taskName;
     descruption.text = editData.descruption;
     selectedDate = DateTime.fromMillisecondsSinceEpoch(editData.date);
@@ -75,6 +83,9 @@ class _EditScreenState extends State<EditScreen> {
                       child: Column(
                         children: [
                           TextFormField(
+                            onChanged: (text) {
+                              editData.taskName = text;
+                            },
                             controller: taskName,
                             validator: (text) {
                               if (text == null || text.isEmpty) {
@@ -98,6 +109,10 @@ class _EditScreenState extends State<EditScreen> {
                             height: 20,
                           ),
                           TextFormField(
+                            autocorrect: false,
+                            onChanged: (text) {
+                              editData.descruption = text;
+                            },
                             controller: descruption,
                             validator: (text) {
                               if (text == null || text.isEmpty) {
@@ -148,7 +163,9 @@ class _EditScreenState extends State<EditScreen> {
                       flex: 2,
                     ),
                     ElevatedButton(
-                      onPressed: () => updateData(),
+                      onPressed: () {
+                        updateData();
+                      },
                       // ignore: sort_child_properties_last
                       child: Text(AppLocalizations.of(context)!.save_change,
                           style: Theme.of(context)
@@ -177,6 +194,15 @@ class _EditScreenState extends State<EditScreen> {
 
   void showDate() async {
     var chooseDate = await showDatePicker(
+        builder: (context, child) {
+          return Theme(
+              data: Theme.of(context).copyWith(
+                  colorScheme: ColorScheme.dark(
+                primary: MyTheme.pryColor,
+                onSurface: MyTheme.whiteColor,
+              )),
+              child: child!);
+        },
         context: context,
         initialDate: selectedDate,
         firstDate: DateTime.now(),
@@ -190,19 +216,16 @@ class _EditScreenState extends State<EditScreen> {
 
   void updateData() {
     if (formKey.currentState!.validate()) {
-      TasksModel task = TasksModel(
-          taskName: taskName.text,
-          descruption: descruption.text,
-          date: DateUtils.dateOnly(selectedDate).millisecondsSinceEpoch);
-
-      showLoading(context, 'Looding...');
-
-      updateTasksFromFirestore(task).then((value) {
-        showMessage(
-            context, 'Tasks is Update', 'OK', () => Navigator.pop(context));
+      showLoading(context, AppLocalizations.of(context)!.loading);
+      updateTasksFromFirestore(editData).then((value) {
+        hideLoading(context);
+        showMessage(context, AppLocalizations.of(context)!.message_comp_update,
+            AppLocalizations.of(context)!.posAction_components, (() {
+          Navigator.popAndPushNamed(context, Home.routeName);
+        }));
       }).onError((error, stackTrace) {
-         // ignore: avoid_print
-         print(error);
+        // ignore: avoid_print
+        print(error);
       });
     }
   }

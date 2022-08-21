@@ -20,6 +20,7 @@
     "is_done" : "Done !",
     "delete" : "Delete",
     "message_comp_delete" : "Are you sure want to delete this task ?",
+    "message_comp_update" : "Task has been updated",
     "message_comp_add" : "Added Successfully",
     "posAction_components" : "Yes",
     "negAction_components" : "No",
