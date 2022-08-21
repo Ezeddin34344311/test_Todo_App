@@ -68,7 +68,7 @@ class MyTheme{
     ),
     dialogTheme:DialogTheme(
       backgroundColor: whiteColor,
-      titleTextStyle: TextStyle(color: whiteColor)
+      titleTextStyle: TextStyle(color: whiteColor),
       
     ) ,
   );
@@ -129,9 +129,12 @@ class MyTheme{
     iconTheme: IconThemeData(
       color: whiteColor
     ),
+    
     dialogTheme:DialogTheme(
       backgroundColor: backbottomNavi,
-      titleTextStyle: TextStyle(color: whiteColor)
+      titleTextStyle: TextStyle(color: whiteColor),
+
+
     )
   
   );

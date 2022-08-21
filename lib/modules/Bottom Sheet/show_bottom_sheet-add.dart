@@ -19,7 +19,6 @@ class ShowModalBottomSheetAdd extends StatefulWidget {
 }
 
 class _ShowModalBottomSheetAddState extends State<ShowModalBottomSheetAdd> {
-  
   var selectedDate = DateTime.now();
   var formKey = GlobalKey<FormState>();
 
@@ -31,92 +30,101 @@ class _ShowModalBottomSheetAddState extends State<ShowModalBottomSheetAdd> {
     var language = Provider.of<LanguageProvider>(context);
     var theme = Provider.of<ThemeProvider>(context);
     return SingleChildScrollView(
-      child: Container(
-        margin: const EdgeInsets.all(20),
-        padding: const EdgeInsets.all(12),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text(
-              AppLocalizations.of(context)!.add_new_task,
-              style: Theme.of(context).textTheme.subtitle1,
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Form(
-              key: formKey,
-              child: Column(
-                children: [
-                  TextFormField(
-                    controller:  taskName,
-                    validator: (text) {
-                      if (text == null || text.isEmpty) {
-                        return AppLocalizations.of(context)!.erreur_task_name ;
-                      }
-                      return null;
-                    },
-                    decoration: InputDecoration(
-                      hintText: AppLocalizations.of(context)!.task_name ,
-                      hintStyle: Theme.of(context)
-                          .textTheme
-                          .bodyText1!
-                          .copyWith(color:theme.initTheme == ThemeMode.light ? Colors.black54
-                                         : Colors.white54 ,),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  TextFormField(
-                    controller: descruption,
-                    validator: (text) {
-                      if (text == null || text.isEmpty) {
-                        return AppLocalizations.of(context)!.erreur_descipton;
-                      }
-                      return null;
-                    },
-                    maxLines: 4,
-                    minLines: 4,
-                    decoration: InputDecoration(
-                      hintText: AppLocalizations.of(context)!.description,
-                      hintStyle: Theme.of(context)
-                          .textTheme
-                          .bodyText1!
-                          .copyWith(color:  theme.initTheme == ThemeMode.light ? Colors.black54
-                                         : Colors.white54 ,),
-                    ),
-                  ),
-                ],
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          margin: const EdgeInsets.all(20),
+          padding: const EdgeInsets.all(12),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                AppLocalizations.of(context)!.add_new_task,
+                style: Theme.of(context).textTheme.subtitle1,
+                textAlign: TextAlign.center,
               ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Text(AppLocalizations.of(context)!.select_time, style: Theme.of(context).textTheme.subtitle1),
-            const SizedBox(
-              height: 20,
-            ),
-            Center(
-              child: InkWell(
-                onTap: (() {
-                  showDate();
-                }),
-                child: Text(
-                    '${selectedDate.day}-${selectedDate.month}-${selectedDate.year}',
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText1!
-                        .copyWith(color:theme.initTheme == ThemeMode.light ? MyTheme.blackColor
-                     : MyTheme.whiteColor,)),
+              const SizedBox(
+                height: 20,
               ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            ElevatedButton(onPressed: setData, child:  Text(AppLocalizations.of(context)!.add_task)),
-          ],
+              Form(
+                key: formKey,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    TextFormField(
+                      controller: taskName,
+                      validator: (text) {
+                        if (text == null || text.isEmpty) {
+                          return AppLocalizations.of(context)!.erreur_task_name;
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                        hintText: AppLocalizations.of(context)!.task_name,
+                        hintStyle:
+                            Theme.of(context).textTheme.bodyText1!.copyWith(
+                                  color: theme.initTheme == ThemeMode.light
+                                      ? Colors.black54
+                                      : Colors.white54,
+                                ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      controller: descruption,
+                      validator: (text) {
+                        if (text == null || text.isEmpty) {
+                          return AppLocalizations.of(context)!.erreur_descipton;
+                        }
+                        return null;
+                      },
+                      maxLines: 4,
+                      minLines: 4,
+                      decoration: InputDecoration(
+                        hintText: AppLocalizations.of(context)!.description,
+                        hintStyle:
+                            Theme.of(context).textTheme.bodyText1!.copyWith(
+                                  color: theme.initTheme == ThemeMode.light
+                                      ? Colors.black54
+                                      : Colors.white54,
+                                ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Text(AppLocalizations.of(context)!.select_time,
+                  style: Theme.of(context).textTheme.subtitle1),
+              const SizedBox(
+                height: 20,
+              ),
+              Center(
+                child: InkWell(
+                  onTap: (() {
+                    showDate();
+                  }),
+                  child: Text(
+                      '${selectedDate.day}-${selectedDate.month}-${selectedDate.year}',
+                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                            color: theme.initTheme == ThemeMode.light
+                                ? MyTheme.blackColor
+                                : MyTheme.whiteColor,
+                          )),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              ElevatedButton(
+                  onPressed: setData,
+                  child: Text(AppLocalizations.of(context)!.add_task)),
+            ],
+          ),
         ),
       ),
     );
@@ -124,11 +132,11 @@ class _ShowModalBottomSheetAddState extends State<ShowModalBottomSheetAdd> {
 
   void showDate() async {
     var chooseDate = await showDatePicker(
-        context: context,
-        initialDate: selectedDate,
-        firstDate: DateTime.now(),
-        lastDate: DateTime.now().add(const Duration(days: 360)),
-        );
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime.now(),
+      lastDate: DateTime.now().add(const Duration(days: 360)),
+    );
 
     if (chooseDate != null) {
       selectedDate = chooseDate;
@@ -147,7 +155,8 @@ class _ShowModalBottomSheetAddState extends State<ShowModalBottomSheetAdd> {
 
       // Show Loading Page
       showLoading(
-        context, AppLocalizations.of(context)!.loading,
+        context,
+        AppLocalizations.of(context)!.loading,
       );
       // Add task From Firestore
       addTasksFromFirestore(task).then(

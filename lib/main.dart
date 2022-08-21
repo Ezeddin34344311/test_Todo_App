@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
       initialRoute: Home.routeName,
       routes: {
         Home.routeName: (context) => Home(),
-        EditScreen.routeName: (context) => EditScreen(),
+       EditScreen.routeName: (context) => EditScreen(),
       },
       
       themeMode: theming.initTheme,

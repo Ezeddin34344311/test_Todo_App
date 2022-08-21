@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+
 class LanguageProvider extends ChangeNotifier {
 
   String initLocale = 'en';
@@ -9,6 +10,8 @@ class LanguageProvider extends ChangeNotifier {
 
     notifyListeners();
   }
+
+  
 
 
 }
